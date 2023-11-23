@@ -1,5 +1,5 @@
 name: Node.js CI and CD
- 
+
 on:
   push:
     branches: [ "main" ]
@@ -24,33 +24,32 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Use Node.js 18.x
+    - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '18.x'
         cache: 'npm'
         cache-dependency-path: userapi/package-lock.json
 
-    - name: List files in userapi directory
-      run: ls -al userapi
+    - name: Install dependencies
+      run: npm ci --prefix userapi
 
-    - run: npm ci --prefix userapi
-    - run: npm run build --if-present --prefix userapi
-    - run: npm test --prefix userapi
+    - name: Run tests
+      run: npm test --prefix userapi
       env:
         REDIS_HOST: localhost
         REDIS_PORT: 6379 
 
-    # Zip the artifact for deployment
-    - name: Zip artifact for deployment
-      run: zip -r release.zip ./*
+    - name: Archive artifact for deployment
+      run: |
+        cd userapi
+        zip -r nodeapp.zip .  # Change this line to create the zip file inside userapi
 
-    # Upload the artifact for the deployment job
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v3
       with:
-        name: node-app
-        path: release.zip
+        name: nodeapp
+        path: userapi/nodeapp.zip  
 
   deploy:
     runs-on: ubuntu-latest
@@ -58,14 +57,15 @@ jobs:
     environment:
       name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
     steps:
     - name: Download artifact from build job
       uses: actions/download-artifact@v3
       with:
-        name: node-app
+        name: nodeapp
 
-    - name: Unzip artifact for deployment
-      run: unzip release.zip
+    - name: Extract artifact for deployment
+      run: unzip nodeapp.zip -d .
 
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
@@ -73,5 +73,5 @@ jobs:
       with:
         app-name: 'my-devops-project'
         slot-name: 'production'
-        package: .
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }} 
+        package: .  
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
