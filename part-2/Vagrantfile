@@ -1,0 +1,33 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  if Vagrant.has_plugin?("vagrant-vbguest")
+    config.vm.provider :virtualbox do |vb|
+      config.vbguest.auto_update = false
+    end
+  end
+
+  # Define the application VM
+  config.vm.define "app" do |app|
+    app.vm.box = "centos/7"
+    app.vm.network "forwarded_port", guest: 3000, host: 3000
+    app.vm.provider "virtualbox" do |vb|
+      vb.name = "app.local"
+      vb.memory = 2048
+      vb.cpus = 1
+    end
+  end
+
+  # Synced folder setup to match the local directory structure
+  config.vm.synced_folder "C:/Users/halim/Desktop/devops-project/userapi", "/var/www/userapi", type: "virtualbox"
+
+  # Provisioning with Ansible
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook = "playbooks/run.yml"
+    ansible.tags = "install"
+    ansible.compatibility_mode = "2.0"
+  end
+
+end

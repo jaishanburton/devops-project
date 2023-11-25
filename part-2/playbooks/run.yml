@@ -1,0 +1,38 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Add NodeSource repository
+      shell: curl -fsSL https://rpm.nodesource.com/setup_14.x | bash -
+
+    - name: Install Node.js
+      yum:
+        name: nodejs
+        state: latest
+
+    - name: Install Redis
+      yum:
+        name: redis
+        state: latest
+      notify:
+        - start redis
+
+    - name: Install npm dependencies
+      command: npm install
+      args:
+        chdir: /var/www/userapi
+
+    - name: Start Node.js application
+      command: npm start
+      args:
+        chdir: /var/www/userapi
+      async: 15
+      poll: 5
+      become_user: vagrant
+
+  handlers:
+    - name: start redis
+      service:
+        name: redis
+        state: started
+        enabled: true

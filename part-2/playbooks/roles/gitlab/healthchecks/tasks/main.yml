@@ -1,0 +1,50 @@
+---
+# OPTIONAL TASKS (needed to run checks from the host machine)
+# - name: Uncomment the GitLab IP whitelist line
+#   replace:
+#     path: /etc/gitlab/gitlab.rb
+#     regexp: '^# (gitlab_rails\[''monitoring_whitelist''\] = \[.*)\]$'
+#     replace: '\1, ''20.20.20.1'']'
+
+# - name: Reconfigure GitLab
+#   command: gitlab-ctl reconfigure
+
+# - name: Restart unicorn
+#   command: gitlab-ctl restart unicorn
+#   retries: 2
+# END OF OPTIONAL TASKS
+
+- name: Check GitLab general health
+  uri:
+    url: http://127.0.0.1/-/health
+    return_content: yes
+  register: gitlab_health
+
+- name: Print GitLab general health
+  debug:
+    msg: "{{ gitlab_health.content }}"
+
+- name: Check GitLab readiness
+  uri:
+    url: http://127.0.0.1/-/readiness
+    return_content: yes
+  register: gitlab_readiness
+  tags: readiness
+
+- name: Print GitLab readiness
+  debug:
+    msg: "{{ gitlab_readiness.content }}"
+  tags: readiness
+
+# Vérification de vivacité (liveness check)
+- name: Check GitLab liveness
+  uri:
+    url: http://127.0.0.1/-/liveness
+    return_content: yes
+  register: gitlab_liveness
+  tags: liveness
+
+- name: Print GitLab liveness
+  debug:
+    msg: "{{ gitlab_liveness.content }}"
+  tags: liveness
