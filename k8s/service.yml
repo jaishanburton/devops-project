@@ -1,25 +1,26 @@
+# Service Kubernetes pour l'application 'myapp'
 apiVersion: v1
 kind: Service
 metadata:
   name: myapp-service
 spec:
   selector:
-    app: myapp
+    app: myapp # Sélectionne les Pods avec l'étiquette 'app: myapp'
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 3000
-  type: LoadBalancer
+      port: 80 # Port du Service exposé dans le cluster
+      targetPort: 3000 # Port cible sur les Pods de l'application
+  type: LoadBalancer # Expose le Service à l'extérieur du cluster
 
 ---
+# Service Kubernetes pour une base de données Redis
 apiVersion: v1
 kind: Service
 metadata:
   name: redis-service
 spec:
   selector:
-    app: redis
+    app: redis # Sélectionne les Pods avec l'étiquette 'app: redis'
   ports:
     - protocol: TCP
-      port: 6379
-      targetPort: 6379
+      port: 6379 # Port standard Redis, à la fois pour le Service et les Pods
