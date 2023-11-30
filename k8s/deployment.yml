@@ -1,24 +1,54 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp-deployment
+  name: myapp-deployment-v1
 spec:
-  replicas: 2 #nombre de réplicas pour notre application
+  replicas: 1
   selector:
     matchLabels:
       app: myapp
+      version: v1
   template:
     metadata:
       labels:
         app: myapp
+        version: v1
     spec:
       containers:
       - name: myapp
-        image: jaishan23/myproject:latest # nom de notre image Docker
+        image: jaishan23/myproject:v1
         ports:
-        - containerPort: 3000 # port utilisé
+        - containerPort: 3000
         env:
         - name: REDIS_HOST
-          value: redis-service 
+          value: redis-service
+        - name: REDIS_PORT
+          value: "6379"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment-v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: myapp
+        version: v2
+    spec:
+      containers:
+      - name: myapp
+        image: jaishan23/myproject:v2
+        ports:
+        - containerPort: 3000
+        env:
+        - name: REDIS_HOST
+          value: redis-service
         - name: REDIS_PORT
           value: "6379"
