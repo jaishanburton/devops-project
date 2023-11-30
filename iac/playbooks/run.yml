@@ -2,25 +2,51 @@
 - hosts: all
   become: true
   tasks:
-    - name: Add NodeSource repository
-      shell: curl -fsSL https://rpm.nodesource.com/setup_14.x | bash -
+    - name: Add NodeSource repository for Node.js 16.x
+      shell: curl -fsSL https://rpm.nodesource.com/setup_16.x | bash -
 
-    - name: Install Node.js
+    - name: Install Node.js using YUM
       yum:
         name: nodejs
         state: latest
 
-    - name: Install Redis
+    - name: Ensure npm is installed
+      yum:
+        name: npm
+        state: present
+
+    - name: Install Redis using YUM
       yum:
         name: redis
         state: latest
       notify:
         - start redis
 
-    - name: Install npm dependencies
+    - name: Install npm dependencies in /var/www/userapi
       command: npm install
       args:
         chdir: /var/www/userapi
+
+    - name: Verify npm installation
+      command: npm --version
+      register: npm_version
+      ignore_errors: true
+
+    - name: Display npm version
+      debug:
+        var: npm_version.stdout
+
+    - name: Execute health check of the application
+      command: curl http://localhost:3000/-/health
+      register: health_check_result
+      ignore_errors: true
+      changed_when: false
+      tags: check
+
+    - name: Display the health check result
+      debug:
+        var: health_check_result.stdout_lines
+      tags: check
 
     - name: Start Node.js application
       command: npm start
