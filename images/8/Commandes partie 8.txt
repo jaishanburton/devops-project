@@ -1,0 +1,152 @@
+PS C:\Users\jaish\OneDrive\Bureau\devops-project> kubectl port-forward svc/prometheus 9090:9090 -n istio-system
+>> 
+Forwarding from 127.0.0.1:9090 -> 9090
+Forwarding from [::1]:9090 -> 9090
+Handling connection for 9090
+Handling connection for 9090
+PS C:\Users\jaish\OneDrive\Bureau\devops-project> cd istio            
+PS C:\Users\jaish\OneDrive\Bureau\devops-project\istio> kubectl apply -f addons/prometheus.yaml         
+serviceaccount/prometheus unchanged
+configmap/prometheus configured
+clusterrole.rbac.authorization.k8s.io/prometheus unchanged
+clusterrolebinding.rbac.authorization.k8s.io/prometheus unchanged
+service/prometheus unchanged
+deployment.apps/prometheus configured
+PS C:\Users\jaish\OneDrive\Bureau\devops-project\istio> kubectl port-forward svc/prometheus 9090:9090 -n istio-system
+>>
+Forwarding from 127.0.0.1:9090 -> 9090
+Forwarding from [::1]:9090 -> 9090
+Handling connection for 9090
+Handling connection for 9090
+PS C:\Users\jaish\OneDrive\Bureau\devops-project\istio> kubectl apply -f addons/prometheus.yaml
+serviceaccount/prometheus unchanged
+configmap/prometheus configured
+clusterrole.rbac.authorization.k8s.io/prometheus unchanged
+clusterrolebinding.rbac.authorization.k8s.io/prometheus unchanged     
+service/prometheus unchanged
+deployment.apps/prometheus configured
+PS C:\Users\jaish\OneDrive\Bureau\devops-project\istio> kubectl port-forward svc/prometheus 9090:9090 -n istio-system
+>>
+Forwarding from 127.0.0.1:9090 -> 9090
+Forwarding from [::1]:9090 -> 9090
+Handling connection for 9090
+Handling connection for 9090
+PS C:\Users\jaish\OneDrive\Bureau\devops-project\istio> kubectl apply -f addons/prometheus.yaml
+serviceaccount/prometheus unchanged
+configmap/prometheus configured
+clusterrole.rbac.authorization.k8s.io/prometheus unchanged
+clusterrolebinding.rbac.authorization.k8s.io/prometheus unchanged
+service/prometheus unchanged
+deployment.apps/prometheus configured
+PS C:\Users\jaish\OneDrive\Bureau\devops-project\istio> kubectl port-forward svc/prometheus 9090:9090 -n istio-system
+>>
+Forwarding from 127.0.0.1:9090 -> 9090
+Forwarding from [::1]:9090 -> 9090
+Handling connection for 9090
+Handling connection for 9090
+PS C:\Users\jaish\OneDrive\Bureau\devops-project\istio> kubectl apply -f addons/prometheus.yaml
+serviceaccount/prometheus unchanged
+configmap/prometheus unchanged
+clusterrole.rbac.authorization.k8s.io/prometheus unchanged
+clusterrolebinding.rbac.authorization.k8s.io/prometheus unchanged
+service/prometheus unchanged
+deployment.apps/prometheus configured
+PS C:\Users\jaish\OneDrive\Bureau\devops-project\istio> kubectl port-forward svc/prometheus 9090:9090 -n istio-system
+>>
+Forwarding from 127.0.0.1:9090 -> 9090
+Forwarding from [::1]:9090 -> 9090
+Handling connection for 9090
+Handling connection for 9090
+Handling connection for 9090
+Handling connection for 9090
+Handling connection for 9090
+Handling connection for 9090
+Handling connection for 9090
+PS C:\Users\jaish\OneDrive\Bureau\devops-project\istio> kubectl apply -f addons/prometheus.yaml
+serviceaccount/prometheus unchanged
+configmap/prometheus configured
+clusterrole.rbac.authorization.k8s.io/prometheus unchanged
+clusterrolebinding.rbac.authorization.k8s.io/prometheus unchanged
+service/prometheus unchanged
+deployment.apps/prometheus configured
+PS C:\Users\jaish\OneDrive\Bureau\devops-project\istio> kubectl port-forward svc/prometheus 9090:9090 -n istio-system
+>>
+Forwarding from 127.0.0.1:9090 -> 9090
+Forwarding from [::1]:9090 -> 9090
+Handling connection for 9090
+Handling connection for 9090
+Handling connection for 9090
+Handling connection for 9090
+PS C:\Users\jaish\OneDrive\Bureau\devops-project\istio> kubectl apply -f addons/grafana.yaml   
+serviceaccount/grafana unchanged
+configmap/grafana unchanged
+service/grafana unchanged
+deployment.apps/grafana configured
+configmap/istio-grafana-dashboards configured
+configmap/istio-services-grafana-dashboards configured
+PS C:\Users\jaish\OneDrive\Bureau\devops-project\istio> cd ..
+PS C:\Users\jaish\OneDrive\Bureau\devops-project> git add .
+warning: in the working copy of 'istio/addons/prometheus.yaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'userapi/src/index.js', LF will be replaced by CRLF the next time Git touches it
+PS C:\Users\jaish\OneDrive\Bureau\devops-project> git commit -m "feat: Partie 8, Prometheus FINI"
+[main 9cd1b21] feat: Partie 8, Prometheus FINI
+ 5 files changed, 78 insertions(+), 22 deletions(-)
+PS C:\Users\jaish\OneDrive\Bureau\devops-project> git push origin main
+
+Enumerating objects: 23, done.
+Counting objects: 100% (23/23), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (12/12), done.
+Writing objects: 100% (12/12), 2.22 KiB | 2.22 MiB/s, done.
+Total 12 (delta 9), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (9/9), completed with 9 local objects. 
+To https://github.com/jaishanburton/devops-project.git
+   508a807..9cd1b21  main -> main
+PS C:\Users\jaish\OneDrive\Bureau\devops-project> cd istio            
+PS C:\Users\jaish\OneDrive\Bureau\devops-project\istio> kubectl apply -f addons/grafana.yaml
+serviceaccount/grafana unchanged
+configmap/grafana unchanged
+service/grafana unchanged
+deployment.apps/grafana configured
+configmap/istio-grafana-dashboards configured
+configmap/istio-services-grafana-dashboards configured
+PS C:\Users\jaish\OneDrive\Bureau\devops-project\istio> kubectl get pods
+NAME                                   READY   STATUS    RESTARTS        AGE
+myapp-deployment-v1-86f5877595-9x5pz   2/2     Running   0            
+   111m
+myapp-deployment-v2-6d4fc6b4f5-tx4rl   2/2     Running   0            
+   111m
+temp-redis                             2/2     Running   2 (3h27m ago)   24h
+PS C:\Users\jaish\OneDrive\Bureau\devops-project\istio> kubectl get pods -n istio-system
+NAME                                    READY   STATUS    RESTARTS        AGE
+grafana-679fd59b96-lhtcj                1/1     Running   1 (24h ago)     26h
+istio-egressgateway-56545f8975-tl2hb    1/1     Running   1 (24h ago)     28h
+istio-ingressgateway-5967697c57-j69p7   1/1     Running   1 (24h ago)     28h
+istiod-7cbcb868d8-l5d5w                 1/1     Running   1 (3h27m ago)   28h
+jaeger-c77954969-ltssm                  1/1     Running   1 (24h ago)     26h
+kiali-6d5c7dfc6b-8xrbs                  1/1     Running   1 (24h ago)     26h
+prometheus-745fcc46c7-tkxrl             2/2     Runninprometheus-745fcc46c7-tkxrl             2/2     Running   0               76m
+PS C:\Users\jaish\OneDrive\Bureau\devops-project\istio> kubectl port-forward svc/grafana 3000:3000 -n istio-system
+Forwarding from 127.0.0.1:3000 -> 3000
+Forwarding from [::1]:3000 -> 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+Handling connection for 3000
+PS C:\Users\jaish\OneDrive\Bureau\devops-project\istio>
