@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
   end
 
   # Synced folder setup to match the local directory structure
-  config.vm.synced_folder "C:/Users/halim/Desktop/devops-project/userapi", "/var/www/userapi", owner: "vagrant", group: "vagrant"
+  config.vm.synced_folder "C:/Users/mathy/OneDrive - Groupe INSEEC (POCE)/Bureau/devops-project/userapi", "/var/www/userapi", owner: "vagrant", group: "vagrant"
 
   # Provisioning with Ansible
   config.vm.provision "ansible_local" do |ansible|
