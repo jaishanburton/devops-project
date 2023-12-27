@@ -31,3 +31,33 @@ Pour exécuter les tests définis avec Mocha, utilisez :
 ```bash
 npm test
 ```
+
+# Partie 2 : Application du pipeline CI/CD
+
+## Aperçu
+Un pipeline d'intégration et de livraison continues (CI/CD) a été configuré et appliqué en utilisant GitHub Actions. Ce pipeline automatise les tests et le déploiement de notre application web sur Microsoft Azure App Service.
+
+## Configuration du Pipeline CI/CD
+
+- **GitHub Actions**: Un workflow de CI/CD a été mis en place dans le répertoire GitHub du projet pour automatiser les tests et le déploiement.
+- **Tests Automatisés**: Les tests sont exécutés automatiquement à chaque push ou pull request pour garantir la non-régression du code.
+- **Déploiement Automatique**: Après un succès des tests, le déploiement est effectué automatiquement vers Azure App Service.
+
+## Déploiement sur Azure
+
+L'application est déployée sur Azure App Service, offrant une plate-forme PaaS pour héberger des applications web :
+
+- **URL de l'Application**: [my-devops-project.azurewebsites.net](http://my-devops-project.azurewebsites.net)
+- **Environnement**: Configuré pour un environnement Linux avec Node.js 18 LTS.
+
+## Instructions de Déploiement
+
+Pour voir le déploiement en action ou pour déclencher un déploiement manuel, suivez ces étapes :
+
+1. Connectez-vous à votre compte GitHub.
+2. Naviguez vers le répertoire du projet sur GitHub.
+3. Allez dans l'onglet 'Actions'.
+4. Sélectionnez le workflow souhaité.
+5. Cliquez sur 'Run workflow' pour déclencher le processus manuellement.
+
+![Capture d'écran de l'application web sur Azure App Service](images/2/azure.png)
