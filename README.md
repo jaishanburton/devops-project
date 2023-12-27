@@ -60,6 +60,7 @@ Pour voir le déploiement en action ou pour déclencher un déploiement manuel, 
 4. Sélectionnez le workflow souhaité.
 5. Cliquez sur 'Run workflow' pour déclencher le processus manuellement.
 
+## Capture d'écran
 ![Capture d'écran de l'application web sur Azure App Service](images/2/azure.png)
 
 # Partie 3 : Configuration et Provisionnement avec IaC
@@ -113,3 +114,6 @@ vagrant halt   # Pour arrêter la VM
 vagrant destroy # Pour supprimer la VM et toutes ses ressources
 ```
 
+## Captures d'écran
+![Provision SSH](images/3/provision_ssh.png)
+![Vagrant Up](images/3/up.png)
