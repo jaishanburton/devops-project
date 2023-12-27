@@ -278,7 +278,7 @@ L'utilisation d'Istio offre une gestion avancée du trafic, des métriques, des 
 
 - **Labeliser le namespace pour l'injection automatique d'Istio** :
 Préparer le namespace default pour l'injection automatique des sidecars Istio.
-  ```bash
+```bash
 kubectl label namespace default istio-injection=enabled
 ```
 
@@ -286,7 +286,7 @@ kubectl label namespace default istio-injection=enabled
 
 - **Déployer les configurations Istio** :
 Mettre en place le routage du trafic entre différentes versions de l'application en appliquant les configurations Istio.
-  ```bash
+```bash
 kubectl apply -f istio/istio-destinationrule.yaml
 kubectl apply -f istio/istio-virtualservice.yaml
 kubectl apply -f istio/istio-gateway.yaml
