@@ -61,3 +61,55 @@ Pour voir le déploiement en action ou pour déclencher un déploiement manuel, 
 5. Cliquez sur 'Run workflow' pour déclencher le processus manuellement.
 
 ![Capture d'écran de l'application web sur Azure App Service](images/2/azure.png)
+
+# Partie 3 : Configuration et Provisionnement avec IaC
+
+## Description
+Cette partie du projet se concentre sur l'utilisation de Vagrant et Ansible pour configurer et provisionner une machine virtuelle (VM) sous Linux. Cela facilite la création d'un environnement de développement reproductible et la gestion de la configuration de l'application.
+
+## Fonctionnalités
+- **Vagrant** : Utilisé pour créer et configurer des environnements de développement légers, reproductibles et portables.
+- **Ansible** : Employé pour le provisionnement automatique de la VM, incluant l'installation de l'environnement d'exécution du langage, de la base de données et de l'application.
+- **Synchronisation de Dossiers** : Permet de partager facilement des fichiers entre l'hôte et la VM.
+- **Health Check** : Configuration d'un point de terminaison pour vérifier l'état de santé de l'application afin d'assurer une surveillance continue.
+
+## Installation et Configuration
+
+### Prérequis
+- Installer Vagrant et VirtualBox sur la machine.
+- Installer Ansible pour le provisionnement automatique.
+
+### Mise en Place de la VM avec Vagrant
+Cloner le dépôt du projet et naviguer vers le sous-dossier `iac/`, puis initialiser et démarrer la VM avec la commande suivante :
+```bash
+vagrant up
+```
+
+### Provisionnement avec Ansible
+Après le démarrage de la VM, lancer le provisionnement avec :
+```bash
+vagrant provision
+```
+
+### Connexion à la VM
+Pour se connecter à la VM avec SSH et vérifier que tout est correctement configuré :
+```bash
+vagrant ssh
+```
+
+## Utilisation
+Utiliser la VM provisionnée pour développer et tester l'application dans un environnement qui reflète la production, et profiter des dossiers synchronisés pour un développement facile.
+
+## Test du Bilan de Santé de l'Application
+Tester le point de terminaison de health check après le déploiement de l'application pour confirmer son bon fonctionnement :
+```bash
+curl http://localhost:PORT/health
+```
+
+## Nettoyage
+Pour arrêter et supprimer la VM :
+```bash
+vagrant halt   # Pour arrêter la VM
+vagrant destroy # Pour supprimer la VM et toutes ses ressources
+```
+
