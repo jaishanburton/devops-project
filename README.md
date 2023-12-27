@@ -164,5 +164,28 @@ L'image est disponible publiquement sur Docker Hub à l'adresse suivante : jaish
 ## Captures d'écran
 ![DockerHub](images/4/image.png)
 
+# Partie 5 : Orchestration de Conteneurs avec Docker Compose
 
+## Configuration de Docker Compose
 
+- **Créer un fichier docker-compose.yml** : 
+  Un fichier `docker-compose.yml` est fourni à la racine du projet pour définir et exécuter l'ensemble des services de l'application dans des conteneurs Docker.
+
+## Démarrage de l'Application avec Docker Compose
+
+- **Utiliser Docker Compose pour démarrer l'application** : 
+  Lancer l'application en exécutant le service défini dans le `docker-compose.yml`.
+```bash
+docker-compose up
+```
+
+- **Arrêter et retirer les conteneurs** : 
+Stopper et supprimer tous les conteneurs créés par le `docker-compose.yml`.
+```bash
+docker-compose down
+```
+
+## Avantages de l'Utilisation de Docker Compose
+
+- Simplifier le démarrage de l'application avec toutes ses dépendances en une seule commande.
+- Assurer la cohérence des environnements de développement, de test et de production.
