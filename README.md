@@ -262,3 +262,67 @@ Libérer les ressources du cluster en supprimant les objets définis dans les fi
 ## Captures d'écran
 ![Kubernetes1](images/6/image.png)
 ![Kubernetes2](images/6/image2.png)
+
+
+# Partie 7 : Service Mesh avec Istio
+
+L'utilisation d'Istio offre une gestion avancée du trafic, des métriques, des politiques de sécurité et une visibilité accrue sur l'infrastructure microservices dans Kubernetes.
+
+## Déploiement avec Istio
+
+- **Installer Istio dans le cluster Kubernetes** :
+  Intégrer Istio dans le cluster pour exploiter les capacités du maillage de services.
+  ```bash
+  istioctl install --set profile=demo -y
+  ```
+
+- **Labeliser le namespace pour l'injection automatique d'Istio** :
+Préparer le namespace default pour l'injection automatique des sidecars Istio.
+  ```bash
+kubectl label namespace default istio-injection=enabled
+```
+
+## Configuration du Routage de Trafic
+
+- **Déployer les configurations Istio** :
+Mettre en place le routage du trafic entre différentes versions de l'application en appliquant les configurations Istio.
+  ```bash
+kubectl apply -f istio/istio-destinationrule.yaml
+kubectl apply -f istio/istio-virtualservice.yaml
+kubectl apply -f istio/istio-gateway.yaml
+```
+
+## Observation avec Kiali
+
+- **Déployer Kiali dans le cluster** :
+Installer Kiali pour visualiser et contrôler le service mesh Istio.
+
+```bash
+kubectl apply -f istio/addons/kiali.yaml
+```
+
+- **Accéder au tableau de bord Kiali** :
+Examiner le maillage de services et surveiller le trafic entre les services via le tableau de bord Kiali.
+```bash
+istioctl dashboard kiali
+```
+
+## Nettoyage des Ressources
+
+- **Retirer les configurations Istio et les ressources** :
+Éliminer les configurations Istio et les ressources associées du cluster une fois les opérations terminées.
+
+```bash
+kubectl delete -f istio/
+```
+
+![Istio1](images/7/1.png)
+![Istio2](images/7/2.png)
+![Istio3](images/7/3.png)
+![Istio4](images/7/4.png)
+![Istio5](images/7/5.png)
+![Istio6](images/7/6.png)
+![Istio7](images/7/7.png)
+![Istio8](images/7/8.png)
+![Istio9](images/7/9.png)
+![Istio10](images/7/10.png)
