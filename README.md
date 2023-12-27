@@ -189,3 +189,76 @@ docker-compose down
 
 - Simplifier le démarrage de l'application avec toutes ses dépendances en une seule commande.
 - Assurer la cohérence des environnements de développement, de test et de production.
+
+## Captures d'écran
+![Docker Compose](images/5/image.png)
+
+# Partie 6 : Orchestration Docker avec Kubernetes
+
+L'orchestration avec Kubernetes sert à automatiser la gestion des applications conteneurisées, offrant ainsi une mise à l'échelle, une gestion du trafic, une découverte de service, et une automatisation du déploiement efficaces.
+
+## Configuration de Kubernetes avec Minikube
+
+- **Démarrer Minikube** :
+  Créer un cluster Kubernetes local simulant un environnement de production.
+  ```bash
+  minikube start
+  ```
+
+- **Vérifier le statut de Minikube** :
+Confirmer l'activation du cluster et sa disponibilité pour le déploiement.
+  ```bash
+  minikube status
+  ```
+
+## Création des Manifestes Kubernetes
+
+- **Appliquer les déploiements (deployment.yaml)** :
+Automatiser le déploiement et la mise à l'échelle des conteneurs d'applications.
+
+  ```bash
+  kubectl apply -f deployment.yaml
+  ```
+
+  - **Appliquer les services (services.yaml)** :
+Exposer les conteneurs d'applications à l'aide de points d'accès réseau configurables.
+  ```bash
+  kubectl apply -f services.yaml
+  ```
+
+  - **Appliquer les volumes persistants (redis-pv-pvc.yaml)** :
+Mettre en œuvre un stockage durable pour les données importantes devant survivre aux redémarrages des conteneurs.
+  ```bash
+  kubectl apply -f redis-pv-pvc.yaml
+  ```
+
+  ## Lancement de l'Application avec Kubernetes
+
+- **Déployer l'application** :
+Lancer l'application en utilisant les configurations déclaratives fournies dans les fichiers YAML.
+  ```bash
+  kubectl apply -f k8s/
+  ```
+
+- **Contrôler l'état des pods** :
+Inspecter l'état des pods pour vérifier le bon déploiement de l'application.
+  ```bash
+  kubectl get pods
+  ```
+
+- **Accéder à l'application via le service Minikube** :
+Ouvrir l'application dans un navigateur en utilisant l'URL fournie par Minikube.
+  ```bash
+  minikube service <nom-du-service>
+  ```
+
+## Nettoyage des Ressources Kubernetes
+- **Retirer les ressources déployées**:
+Libérer les ressources du cluster en supprimant les objets définis dans les fichiers YAML.
+  ```bash
+  kubectl delete -f k8s/
+  ```
+
+## Captures d'écran
+![Kubernetes1](images/6/image.png)
+![Kubernetes2](images/6/image2.png)
