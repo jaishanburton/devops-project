@@ -326,3 +326,83 @@ kubectl delete -f istio/
 ![Istio8](images/7/8.png)
 ![Istio9](images/7/9.png)
 ![Istio10](images/7/10.png)
+
+# Partie 8 : Monitoring avec Prometheus et Grafana
+
+## Surveillance avec Prometheus
+
+Prometheus est utilisé pour collecter des métriques et des alertes en temps réel. Il fournit un puissant langage de requête pour lire et analyser ces métriques.
+
+### Commandes pour l'installation et la vérification de Prometheus
+
+- **Installer Prometheus dans le cluster Istio** :
+  ```bash
+  kubectl apply -f istio/addons/prometheus.yaml
+  ```
+
+- **Port-forwarding pour accéder à l'interface de Prometheus** :
+  ```bash
+  kubectl port-forward svc/prometheus 9090:9090 -n istio-system
+  ```
+
+  ### Interprétation des graphiques Prometheus
+
+- **istio_requests_total** : Ce graphique montre le nombre total de requêtes traitées par Istio, ce qui peut aider à identifier les pics de trafic ou les anomalies.
+- **up** : Cette simple requête indique l'état des services surveillés, où 1 signifie opérationnel et 0 signifie en panne.
+
+## Visualisation avec Grafana
+
+Pour mettre en place la surveillance de l’application conteneurisée avec Grafana, voici les étapes à suivre :
+
+### 1. Configurer Grafana :
+- Déployer Grafana sur le cluster Kubernetes en appliquant le fichier de configuration grafana.yaml :
+  ```bash
+  kubectl apply -f addons/grafana.yaml -n istio-system
+  ```
+
+  ### 2. Accéder à Grafana :
+- Rediriger le trafic du port local vers le service Grafana en utilisant le port-forwarding :
+  ```bash
+  kubectl port-forward svc/grafana 3000:3000 -n istio-system
+  ```
+- L'interface de Grafana est maintenant accessible via [http://127.0.0.1:3000](http://127.0.0.1:3000).
+
+### 3. Configurer des tableaux de bord :
+- Se connecter à Grafana et lier le serveur Prometheus en tant que source de données pour visualiser les métriques collectées.
+- Créer et personnaliser des tableaux de bord pour afficher les métriques pertinentes de l'application.
+
+### 4. Créer des alertes :
+- Configurer des alertes pour surveiller des conditions spécifiques telles que l'utilisation de la mémoire ou la disponibilité de l'application.
+- Utiliser la fonctionnalité d'alerting de Grafana pour définir les seuils et les conditions qui déclencheront les alertes.
+
+### 5. Gérer et répondre aux alertes :
+- Examiner et ajuster les alertes dans la section 'Alerting' de Grafana.
+- Réagir aux alertes Pending ou Firing en investiguant et en résolvant les problèmes indiqués.
+
+## Description des alertes :
+
+### 1. Alerte "High Memory Usage" (Utilisation élevée de la mémoire) :
+- **Objectif** : Cette alerte surveille l'utilisation de la mémoire de votre application conteneurisée.
+- **Configuration** : Vous avez défini un seuil supérieur d'utilisation de la mémoire au-delà duquel l'alerte doit être déclenchée.
+- **Comportement** : Lorsque l'utilisation de la mémoire de l'application dépasse le seuil défini, Grafana déclenche cette alerte.
+- **Action** : Une notification est envoyée aux canaux définis (par exemple, e-mail, Slack) pour informer les administrateurs du dépassement de l'utilisation de la mémoire.
+- **Résolution** : Les administrateurs peuvent réagir rapidement en examinant les métriques de l'application, en identifiant la source de l'utilisation excessive de la mémoire et en prenant des mesures pour résoudre le problème, comme le redimensionnement des ressources allouées au conteneur.
+
+### 2. Alerte "Application Down" (Application hors service) :
+- **Objectif** : Cette alerte surveille l'état de disponibilité de votre application.
+- **Configuration** : Vous avez défini un seuil de non-disponibilité au-delà duquel l'alerte doit être déclenchée.
+- **Comportement** : Lorsque l'application devient non disponible, par exemple en raison d'une panne ou d'une erreur majeure, Grafana déclenche cette alerte.
+- **Action** : Une notification est envoyée aux canaux définis pour alerter les administrateurs de l'indisponibilité de l'application.
+- **Résolution** : Les administrateurs peuvent intervenir immédiatement pour enquêter sur la cause de l'indisponibilité de l'application, effectuer des diagnostics et prendre des mesures correctives, telles que le redémarrage de l'application ou la correction des erreurs.
+
+Ces deux alertes contribuent à maintenir la disponibilité et la performance de votre application en identifiant les problèmes potentiels de manière proactive. En cas de déclenchement de ces alertes, elles permettent une réaction rapide pour minimiser les perturbations et garantir une expérience utilisateur optimale.
+
+![Prometheus1](images/8/1.png)
+![Prometheus2](images/8/2.png)
+![Prometheus3](images/8/3.png)
+![Prometheus4](images/8/4.png)
+![Grafana1](images/8/5.png)
+![Grafana2](images/8/6.png)
+![Grafana3](images/8/7.png)
+![Grafana4](images/8/8.png)
+![Grafana5](images/8/9.png)
