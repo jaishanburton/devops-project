@@ -116,4 +116,53 @@ vagrant destroy # Pour supprimer la VM et toutes ses ressources
 
 ## Captures d'écran
 ![Provision SSH](images/3/provision_ssh.png)
+
 ![Vagrant Up](images/3/up.png)
+
+# Partie 4 : Conteneurisation avec Docker
+
+## Création de l'image Docker
+Pour conteneuriser l'application, les étapes suivantes ont été suivies :
+
+1. Création d'un fichier `Dockerfile` à la racine du projet pour définir les étapes de construction de l'image Docker de l'application.
+
+2. Construction de l'image Docker avec la commande :
+```bash
+docker build -t jaishan23/myproject:<tag> .
+```
+
+3. Vérifier l'image : Après la construction, il faut vérifier que l'image a été créée avec succès :
+ ```bash
+docker images
+```
+## Téléversement de l'image sur Docker Hub
+Après la création de l'image Docker, les étapes pour la téléverser sur Docker Hub sont :
+
+1. Connexion à Docker Hub avec la commande :
+ ```bash
+docker login
+```
+
+2. Téléversement de l'image construite sur le compte Docker Hub avec la commande :
+ ```bash
+docker push jaishan23/myproject:latest
+```
+
+## Utilisation de .dockerignore
+Pour éviter d'inclure des fichiers inutiles dans l'image Docker, un fichier .dockerignore a été configuré avec les entrées suivantes :
+
+- node_modules 
+- npm-debug.log 
+- Dockerfile
+- .dockerignore 
+- .git
+- .gitignore
+
+## Lien vers le Docker Hub
+L'image est disponible publiquement sur Docker Hub à l'adresse suivante : jaishan23/myproject
+
+## Captures d'écran
+![DockerHub](images/4/image.png)
+
+
+
