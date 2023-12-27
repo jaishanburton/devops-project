@@ -190,7 +190,7 @@ docker-compose down
 - Simplifier le démarrage de l'application avec toutes ses dépendances en une seule commande.
 - Assurer la cohérence des environnements de développement, de test et de production.
 
-## Captures d'écran
+## Capture d'écran
 ![Docker Compose](images/5/image.png)
 
 # Partie 6 : Orchestration Docker avec Kubernetes
@@ -315,7 +315,7 @@ istioctl dashboard kiali
 ```bash
 kubectl delete -f istio/
 ```
-
+## Captures d'écran
 ![Istio1](images/7/1.png)
 ![Istio2](images/7/2.png)
 ![Istio3](images/7/3.png)
@@ -397,6 +397,7 @@ Pour mettre en place la surveillance de l’application conteneurisée avec Graf
 
 Ces deux alertes contribuent à maintenir la disponibilité et la performance de votre application en identifiant les problèmes potentiels de manière proactive. En cas de déclenchement de ces alertes, elles permettent une réaction rapide pour minimiser les perturbations et garantir une expérience utilisateur optimale.
 
+## Captures d'écran
 ![Prometheus1](images/8/1.png)
 ![Prometheus2](images/8/2.png)
 ![Prometheus3](images/8/3.png)
